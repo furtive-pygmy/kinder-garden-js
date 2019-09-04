@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <select style="width:200px;" class="js-data-example-ajax">
+    </select> 
+    <script>
+        let js_debug = false;
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+    <script src="js/lead.app.js"></script>
+    <script src="js/lead.app.event.js"></script>
+    <script src="js/Api/PostalCode/PostalCodeApp.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            const app = leadApp;
+            const $postalCode = $('.js-data-example-ajax'); 
+            $postalCode.select2({
+                ajax:{
+                    url: function(params) {
+                        return 'https://vicopo.selfbuild.fr/cherche/' + params.term;
+                    },
+                    processResults: function (data) {
+                        app.event.publish('/api/postal-code', {'data': data});
+                        return {
+                            results : app.getPostalCodes() 
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
