@@ -10,50 +10,41 @@
 </head>
 <body>
     <div class="row">
-        <div class="container">
-            <form>
-              <h2>Contact Us</h2>
-              <div class="row">
+       <div class="container">
+          <form enctype ="multipart/form-data">
+             <h2>Contact Us</h2>
+             <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="first">First Name</label>
-                    <input type="text" class="form-control" placeholder="" id="first">
-                  </div>
+                   <div class="form-group">
+                      <label for="first">First Name</label>
+                      <input type="text" class="form-control" placeholder="" id="first">
+                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="last">Last Name</label>
-                    <input type="text" class="form-control" placeholder="" id="last">
-                  </div>
+                   <div class="form-group">
+                      <label for="last">Last Name</label>
+                      <input type="text" class="form-control" placeholder="" id="last">
+                   </div>
                 </div>
                 <div class="col-md-6">
-                <div class="form-group">
-                    <label>Postal Code</label>
-                    <select class="form-control js-data-example-ajax"></select>
+                   <div class="form-group">
+                      <label>Postal Code</label>
+                      <select class="form-control js-data-example-ajax"></select>
+                   </div>
                 </div>
-            </div>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
+                <div class="col-md-6">
+                   <div class="form-group">
+                      <label>Take a photo</label>
+                      <input type="file" name="video" accept="video/*" capture>
+                    </div>
+                </div>
+             </div>
+             <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+       </div>
     </div>
-   
-    <!--
-    <div class="row">
-        <div class="col-lg-4" style="background-color: red;">
-            <form>
-                <div class="form-group">
-                    <select style="width:200px;" class="js-data-example-ajax"></select>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="lastname">
-                </div>
-            </form>
-        </div>
-    </div>
--->
     <script>
-        let js_debug = false;
+       let js_debug = false;
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -63,23 +54,23 @@
     <script src="js/lead.app.event.js"></script>
     <script src="js/Api/PostalCode/PostalCodeApp.js"></script>
     <script>
-        $(document).ready(function() {
-            const app = leadApp;
-            const $postalCode = $('.js-data-example-ajax'); 
-            $postalCode.select2({
-                ajax:{
-                    url: function(params) {
-                        return 'https://vicopo.selfbuild.fr/cherche/' + params.term;
-                    },
-                    processResults: function (data) {
-                        app.event.publish('/api/postal-code', {'data': data});
-                        return {
-                            results : app.getPostalCodes() 
-                        }
-                    }
-                }
-            });
-        });
+       $(document).ready(function() {
+           const app = leadApp;
+           const $postalCode = $('.js-data-example-ajax'); 
+           $postalCode.select2({
+               ajax:{
+                   url: function(params) {
+                       return 'https://vicopo.selfbuild.fr/cherche/' + params.term;
+                   },
+                   processResults: function (data) {
+                       app.event.publish('/api/postal-code', {'data': data});
+                       return {
+                           results : app.getPostalCodes() 
+                       }
+                   }
+               }
+           });
+       });
     </script>
-</body>
-</html>
+ </body>
+ </html>
